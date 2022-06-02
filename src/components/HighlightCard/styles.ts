@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
-import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
+import { RFValue } from 'react-native-responsive-fontsize';
 import { AnyStyledComponent } from 'styled-components';
 
 export const Container = styled.View`
@@ -12,8 +12,6 @@ export const Container = styled.View`
   padding: 19px 23px;
   padding-bottom: ${RFValue(42)}px;
   margin-right: 16px;
-
-  height: 200px;
 `;
 
 export const Header = styled.View`
