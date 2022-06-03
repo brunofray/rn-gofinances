@@ -2,8 +2,9 @@ import styled, { css } from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { AnyStyledComponent } from 'styled-components';
+import { TouchableOpacity } from 'react-native';
 
-export const Container = styled.TouchableOpacity.attrs({
+export const Container = styled(TouchableOpacity).attrs({
   activityOpacity: 0.7
 })`
   background-color: ${({ theme }) => theme.colors.shape};
