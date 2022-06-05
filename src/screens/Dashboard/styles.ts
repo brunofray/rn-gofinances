@@ -4,6 +4,7 @@ import { Feather } from '@expo/vector-icons';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { AnyStyledComponent } from 'styled-components';
 import { getBottomSpace, getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { TouchableOpacity } from 'react-native';
 
 import { DataListProps } from '.';
 
@@ -63,6 +64,8 @@ export const UserName = styled.Text`
   font-size: ${RFValue(18)}px;
   font-family: ${({ theme }) => theme.fonts.bold};
 `;
+
+export const LogoutButton = styled(TouchableOpacity)``;
 
 export const Icon = styled(Feather as unknown as AnyStyledComponent)`
   color: ${({ theme }) => theme.colors.secondary};
