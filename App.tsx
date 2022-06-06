@@ -19,6 +19,8 @@ import 'intl/locale-data/jsonp/pt-BR';
 
 import { SignIn } from './src/screens/SignIn';
 
+import { AuthContext } from './src/AuthContext';
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -35,7 +37,11 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <NavigationContainer>
           <StatusBar barStyle="light-content" translucent={true} backgroundColor={theme.colors.primary} />
-          <SignIn />
+
+          <AuthContext.Provider value={[]}>
+            <SignIn />
+          </AuthContext.Provider>
+
         </NavigationContainer>
       </ThemeProvider>
     </GestureHandlerRootView>
