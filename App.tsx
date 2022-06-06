@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 
 import {
@@ -32,6 +32,7 @@ export default function App() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
+          <StatusBar barStyle="light-content"/>
           <AppRoutes />
         </NavigationContainer>
       </ThemeProvider>

@@ -53,6 +53,10 @@ export function Dashboard() {
     collection: DataListProps[],
     type: 'positive' | 'negative'
   ) {
+    if ( collection.length === 0 ) {
+      return '';
+    }
+
     const lastTransaction = 
     Math.max.apply(Math, collection
     .filter(transaction => transaction.type === type)
@@ -95,18 +99,18 @@ export function Dashboard() {
     setTransactions(transactionsFormatted);
     const lastTransactionEntries = getLastTransactionDate(transactions, 'positive');
     const lastTransactionExpensives = getLastTransactionDate(transactions, 'negative');
-    const totalInterval = `1 a ${lastTransactionExpensives}`;
+    const totalInterval = lastTransactionExpensives !== '' ? `1 a ${lastTransactionExpensives}` : '';
 
     total = entriesTotal - expensivesTotal;
 
     setHighlightData({
       entries: {
         amount: getNumberFormatted(entriesTotal),
-        lastTransaction: `Última entrada dia ${lastTransactionEntries}`,
+        lastTransaction: lastTransactionEntries !== '' ? `Última entrada dia ${lastTransactionEntries}` : '',
       },
       expensives: {
         amount: getNumberFormatted(expensivesTotal),
-        lastTransaction: `Última saída ${lastTransactionExpensives}`,
+        lastTransaction: lastTransactionExpensives !== '' ? `Última saída ${lastTransactionExpensives}` : '',
       },
       total: {
         amount: getNumberFormatted(total),
