@@ -25,7 +25,7 @@ import {
   LoadContainer,
 } from './styles';
 
-import { getDateFormatted, getNumberFormatted } from '../../utils/util';
+import { getDateFormatted, getNamDateFormatted, getNumberFormatted } from '../../utils/util';
 import { useTheme } from 'styled-components';
 
 export interface DataListProps extends TransactionCardProps {
@@ -34,6 +34,7 @@ export interface DataListProps extends TransactionCardProps {
 
 interface HighlightProps {
   amount: string;
+  lastTransaction: string;
 }
 interface HighlightData {
   entries: HighlightProps;
@@ -47,6 +48,18 @@ export function Dashboard() {
   const [highlightData, setHighlightData] = useState<HighlightData>({} as HighlightData);
 
   const theme = useTheme();
+
+  function getLastTransactionDate(
+    collection: DataListProps[],
+    type: 'positive' | 'negative'
+  ) {
+    const lastTransaction = 
+    Math.max.apply(Math, collection
+    .filter(transaction => transaction.type === type)
+    .map(transaction => new Date(transaction.date).getTime()));
+
+    return getNamDateFormatted(new Date(lastTransaction));
+  }
 
   async function loadTransactions() {
     const dataKey = '@gofinances:transactions';
@@ -80,18 +93,24 @@ export function Dashboard() {
     });
 
     setTransactions(transactionsFormatted);
+    const lastTransactionEntries = getLastTransactionDate(transactions, 'positive');
+    const lastTransactionExpensives = getLastTransactionDate(transactions, 'negative');
+    const totalInterval = `1 a ${lastTransactionExpensives}`;
 
     total = entriesTotal - expensivesTotal;
 
     setHighlightData({
       entries: {
-        amount: getNumberFormatted(entriesTotal)
+        amount: getNumberFormatted(entriesTotal),
+        lastTransaction: `Última entrada dia ${lastTransactionEntries}`,
       },
       expensives: {
-        amount: getNumberFormatted(expensivesTotal)
+        amount: getNumberFormatted(expensivesTotal),
+        lastTransaction: `Última saída ${lastTransactionExpensives}`,
       },
       total: {
-        amount: getNumberFormatted(total)
+        amount: getNumberFormatted(total),
+        lastTransaction: totalInterval,
       }
     });
 
@@ -134,9 +153,9 @@ export function Dashboard() {
           </Header>
 
           <HighlightCards>
-            <HighlightCard title="Entradas" amount={highlightData.entries.amount} lastTransaction="Última entrada dia 13 de abril" type="up"/>
-            <HighlightCard title="Saídas" amount={highlightData.expensives.amount} lastTransaction="Última saída dia 03 de abril" type="down"/>
-            <HighlightCard title="Total" amount={highlightData.total.amount} lastTransaction="01 à 16 de abril" type="total"/>
+            <HighlightCard title="Entradas" amount={highlightData.entries.amount} lastTransaction={highlightData.entries.lastTransaction} type="up"/>
+            <HighlightCard title="Saídas" amount={highlightData.expensives.amount} lastTransaction={highlightData.expensives.lastTransaction} type="down"/>
+            <HighlightCard title="Total" amount={highlightData.total.amount} lastTransaction={highlightData.total.lastTransaction} type="total"/>
           </HighlightCards>
 
           <Transactions>

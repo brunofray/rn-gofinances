@@ -12,3 +12,11 @@ export function getDateFormatted(date: Date) {
     year: 'numeric',
   }).format( date );
 }
+
+export function getNamDateFormatted(date: Date) {
+  return `${date.getDate()} de ${getNamMonth(date)}`;
+}
+
+export function getNamMonth(date: Date) {
+  return date.toLocaleString('pt-BR', {month: 'long'});
+}
