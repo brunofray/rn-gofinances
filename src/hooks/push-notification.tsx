@@ -72,7 +72,7 @@ function SendNotification({ children }: PushNotificationProviderProps){
       }
       token = (await Notifications.getExpoPushTokenAsync()).data;
     } else {
-      alert('Must use physical device for Push Notifications');
+      // alert('Must use physical device for Push Notifications');
     }
 
     if (Platform.OS === 'android') {
@@ -88,14 +88,7 @@ function SendNotification({ children }: PushNotificationProviderProps){
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
-
-    if ( responseListener.current ) {
-      // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
-      responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-        console.log(response);
-      });
-    }
-
+    
     return () => {
       if ( notificationListener.current ) {
         Notifications.removeNotificationSubscription(notificationListener.current);

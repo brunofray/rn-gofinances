@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import * as Device from 'expo-device';
 import { ActivityIndicator, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -175,10 +176,13 @@ export function Dashboard() {
                 </User>
               </UserInfo>
               
-              <HeaderIcons>                
-                <NotificationButton onPress={() => handleSendPushNotification(messageNotification)}>
-                  <Icon name="bell"/>
-                </NotificationButton>
+              <HeaderIcons>
+                {
+                  Device.isDevice &&
+                  <NotificationButton onPress={() => handleSendPushNotification(messageNotification)}>
+                    <Icon name="bell"/>
+                  </NotificationButton>
+                }
                 <LogoutButton onPress={signOut}>
                   <Icon name="power"/>
                 </LogoutButton>
