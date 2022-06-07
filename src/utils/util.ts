@@ -14,7 +14,7 @@ export function getDateFormatted(date: Date) {
 }
 
 export function getNamDateFormatted(date: Date) {
-  return `${date.getDate()} de ${getNamMonth(date)}`;
+  return `${String(date.getDate()).padStart(2, '0')} de ${getNamMonth(date)}`;
 }
 
 export function getNamMonth(date: Date) {

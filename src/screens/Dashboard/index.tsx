@@ -55,13 +55,15 @@ export function Dashboard() {
     collection: DataListProps[],
     type: 'positive' | 'negative'
   ) {
-    if ( collection.length === 0 ) {
+    const collectionFilttered = collection
+    .filter(transaction => transaction.type === type);
+
+    if ( collectionFilttered.length === 0 ) {
       return '';
     }
 
     const lastTransaction = 
-    Math.max.apply(Math, collection
-    .filter(transaction => transaction.type === type)
+    Math.max.apply(Math, collectionFilttered
     .map(transaction => new Date(transaction.date).getTime()));
 
     return getNamDateFormatted(new Date(lastTransaction));
@@ -101,18 +103,18 @@ export function Dashboard() {
     setTransactions(transactionsFormatted);
     const lastTransactionEntries = getLastTransactionDate(transactions, 'positive');
     const lastTransactionExpensives = getLastTransactionDate(transactions, 'negative');
-    const totalInterval = lastTransactionExpensives !== '' ? `1 a ${lastTransactionExpensives}` : '';
+    const totalInterval = lastTransactionExpensives !== '' ? `01 a ${lastTransactionExpensives}` : 'Não há movimentações';
 
     total = entriesTotal - expensivesTotal;
 
     setHighlightData({
       entries: {
         amount: getNumberFormatted(entriesTotal),
-        lastTransaction: lastTransactionEntries !== '' ? `Última entrada dia ${lastTransactionEntries}` : '',
+        lastTransaction: lastTransactionEntries !== '' ? `Última entrada dia ${lastTransactionEntries}` : 'Não há entrada',
       },
       expensives: {
         amount: getNumberFormatted(expensivesTotal),
-        lastTransaction: lastTransactionExpensives !== '' ? `Última saída ${lastTransactionExpensives}` : '',
+        lastTransaction: lastTransactionExpensives !== '' ? `Última saída dia ${lastTransactionExpensives}` : 'Não há saída',
       },
       total: {
         amount: getNumberFormatted(total),
