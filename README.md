@@ -13,7 +13,7 @@
 
 <p align="center">
   <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/brunofray/rn-gofinances?color=%235636D3">
-  <a href="https://www.linkedin.com/in/eliasgcf/"><img alt="Made by" src="https://img.shields.io/badge/made%20by-Bruno%20Fray-%235636D3"></a>
+  <a href="https://www.linkedin.com/in/brunofray/"><img alt="Made by" src="https://img.shields.io/badge/made%20by-Bruno%20Fray-%235636D3"></a>
   <img alt="Repository size" src="https://img.shields.io/github/repo-size/brunofray/rn-gofinances?color=%235636D3">
   <a href="https://github.com/brunofray/rn-gofinances/commits/master"><img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/brunofray/rn-gofinances?color=%235636D3"></a>
   <a href="https://github.com/brunofray/rn-gofinances/issues"><img alt="Repository issues" src="https://img.shields.io/github/issues/brunofray/rn-gofinances?color=%235636D3"></a>
