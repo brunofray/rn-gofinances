@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StatusBar } from 'react-native';
+import { View, Text, StatusBar, LogBox } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 
 import {
@@ -16,8 +16,6 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 
-import { SignIn } from './src/screens/SignIn';
-
 import { AuthProvider, useAuth } from './src/hooks/auth';
 
 export default function App() {
@@ -28,11 +26,13 @@ export default function App() {
   });
 
   const { userStorageLoading } = useAuth();
-
+  
   if(!fontsLoaded || userStorageLoading) {
     return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><Text>Carregando...</Text></View>
   }
 
+  LogBox.ignoreLogs(["EventEmitter.removeListener"]);
+  
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider theme={theme}>
