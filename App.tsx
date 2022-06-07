@@ -18,7 +18,7 @@ import 'intl/locale-data/jsonp/pt-BR';
 
 import { SignIn } from './src/screens/SignIn';
 
-import { AuthProvider } from './src/hooks/auth';
+import { AuthProvider, useAuth } from './src/hooks/auth';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -27,7 +27,9 @@ export default function App() {
     Poppins_700Bold,
   });
 
-  if(!fontsLoaded) {
+  const { userStorageLoading } = useAuth();
+
+  if(!fontsLoaded || userStorageLoading) {
     return <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><Text>Carregando...</Text></View>
   }
 

@@ -27,6 +27,7 @@ import {
 
 import { getDateFormatted, getNamDateFormatted, getNumberFormatted } from '../../utils/util';
 import { useTheme } from 'styled-components';
+import { useAuth } from '../../hooks/auth';
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
@@ -48,6 +49,7 @@ export function Dashboard() {
   const [highlightData, setHighlightData] = useState<HighlightData>({} as HighlightData);
 
   const theme = useTheme();
+  const { signOut, user } = useAuth();
 
   function getLastTransactionDate(
     collection: DataListProps[],
@@ -143,14 +145,14 @@ export function Dashboard() {
           <Header>
             <UserWrapper>
               <UserInfo>
-                <Photo source={{ uri: 'https://github.com/brunofray.png' }}/>
+                <Photo source={{ uri: user.photo }}/>
                 <User>
                   <UserGreeting>Olá, </UserGreeting>
-                  <UserName>Bruno</UserName>
+                  <UserName>{user.name}</UserName>
                 </User>
               </UserInfo>
               
-              <LogoutButton onPress={() => {}}>
+              <LogoutButton onPress={signOut}>
                 <Icon name="power"/>
               </LogoutButton>
             </UserWrapper>
