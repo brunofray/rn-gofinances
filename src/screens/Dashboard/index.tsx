@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useFocusEffect } from '@react-navigation/native';
@@ -21,6 +21,8 @@ import {
   Transactions,
   Title,
   TransactionList,
+  HeaderIcons,
+  NotificationButton,
   LogoutButton,
   LoadContainer,
 } from './styles';
@@ -28,6 +30,7 @@ import {
 import { getDateFormatted, getNamDateFormatted, getNumberFormatted } from '../../utils/util';
 import { useTheme } from 'styled-components';
 import { useAuth } from '../../hooks/auth';
+import { MessageProps, usePushNotification } from '../../hooks/push-notification';
 
 export interface DataListProps extends TransactionCardProps {
   id: string;
@@ -50,6 +53,24 @@ export function Dashboard() {
 
   const theme = useTheme();
   const { signOut, user } = useAuth();
+  const { sendPushNotification, expoPushToken } = usePushNotification();
+
+  const messageNotification = {
+    to: expoPushToken,
+    sound: 'default',
+    title: 'GoFinances',
+    body: 'Suas finanças em dia!',
+    data: { someData: 'goes here' },
+  } as unknown as MessageProps;
+
+  async function handleSendPushNotification(messageNotification: MessageProps) {
+    try {
+      await sendPushNotification(messageNotification);
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Não foi possível enviar uma notificação');
+    }
+  }
 
   function getLastTransactionDate(
     collection: DataListProps[],
@@ -154,9 +175,14 @@ export function Dashboard() {
                 </User>
               </UserInfo>
               
-              <LogoutButton onPress={signOut}>
-                <Icon name="power"/>
-              </LogoutButton>
+              <HeaderIcons>                
+                <NotificationButton onPress={() => handleSendPushNotification(messageNotification)}>
+                  <Icon name="bell"/>
+                </NotificationButton>
+                <LogoutButton onPress={signOut}>
+                  <Icon name="power"/>
+                </LogoutButton>
+              </HeaderIcons>
             </UserWrapper>
           </Header>
 

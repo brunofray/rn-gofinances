@@ -65,7 +65,16 @@ export const UserName = styled.Text`
   font-family: ${({ theme }) => theme.fonts.bold};
 `;
 
-export const LogoutButton = styled(TouchableOpacity)``;
+export const HeaderIcons = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const NotificationButton = styled(TouchableOpacity)``;
+
+export const LogoutButton = styled(TouchableOpacity)`
+  margin-left: 20px;
+`;
 
 export const Icon = styled(Feather as unknown as AnyStyledComponent)`
   color: ${({ theme }) => theme.colors.secondary};

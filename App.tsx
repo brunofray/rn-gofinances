@@ -17,6 +17,7 @@ import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 
 import { AuthProvider, useAuth } from './src/hooks/auth';
+import { SendNotification } from './src/hooks/push-notification';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -38,7 +39,9 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <StatusBar barStyle="light-content" translucent={true} backgroundColor={theme.colors.primary} />
         <AuthProvider>
-          <Routes />
+          <SendNotification>
+            <Routes />
+          </SendNotification>
         </AuthProvider>
       </ThemeProvider>
     </GestureHandlerRootView>
