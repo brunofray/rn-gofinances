@@ -4,6 +4,20 @@
     "slug": "gofinances",
     "scheme": "gofinances",
     "version": "1.0.0",
+    "icon": "./src/assets/icon.png", 
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#5636D3"
+    },
+    "ios": { 
+      "bundleIdentifier": "com.fray.gofinances", 
+      "buildNumber": "1.0.0" 
+    }, 
+    "android": {
+      "package": "com.fray.gofinances",
+      "versionCode": 1
+    },
     "assetBundlePatterns": [
       "**/*"
     ]

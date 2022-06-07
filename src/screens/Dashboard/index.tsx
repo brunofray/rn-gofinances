@@ -177,12 +177,12 @@ export function Dashboard() {
               </UserInfo>
               
               <HeaderIcons>
-                {
+                {/* {
                   Device.isDevice &&
                   <NotificationButton onPress={() => handleSendPushNotification(messageNotification)}>
                     <Icon name="bell"/>
                   </NotificationButton>
-                }
+                } */}
                 <LogoutButton onPress={signOut}>
                   <Icon name="power"/>
                 </LogoutButton>
