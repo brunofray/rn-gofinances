@@ -7,4 +7,4 @@
 - React Native
 - TypeScript
 
-![screencap-2022-06-07T020542 941Z](https://user-images.githubusercontent.com/26939700/172280929-8c9fa622-0b8f-408c-8682-f4050ddcbca1.gif)
+![screencap-2022-06-07T020542 941Z](https://user-images.githubusercontent.com/26939700/172281151-63c6a655-2f64-4ea3-b980-0b3fd6059f84.gif)
